@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@fontsource/manrope": "^4.2.2",
     "@tailwindcss/forms": "^0.3.2",
     "axios": "^0.21.1",
     "js-cookie": "^2.2.1",

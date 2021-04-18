@@ -46,7 +46,7 @@ function Banner({ children }) {
   };
 
   return (
-    <div class="static w-screen h-24 bg-red-50 shadow bg-gradient-to-b from-red-400 font-sans font-light">
+    <div class="static w-screen h-24 bg-red-50 shadow bg-gradient-to-b from-red-400 font-light">
       <div class="flex w-full h-full flex-row items-end">
         <div class="flex-none h-full w-40 flex items-center justify-center">
           <div class="w-28">
