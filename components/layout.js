@@ -1,5 +1,5 @@
-import Link from 'next/link';
+import Banner from "./banner";
 
 export default function Layout({ children }) {
-  return <div class="font-sans text-xl">{children}</div>;
+  return <div class="font-sans text-xl"><Banner />{children}</div>;
 }
