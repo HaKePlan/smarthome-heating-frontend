@@ -24,19 +24,36 @@ const Login = () => {
         Router.push('/');
       })
       .catch((err) => {
-        console.log(err.response);
         setLoginError(err.response.data.message);
       });
   }
 
-  let displayError;
-  if (loginError) {
-    displayError = (
-      <div class="absolute left-0 flex items-center h-10 w-4/6 rounded-lg flex-auto text-base uppercase">
-        <p class="font-bold absolute left-3 text-red-700">{loginError}</p>
-      </div>
-    );
+  function remove(el) {
+    var element = el;
+    element.remove(el);
   }
+
+  const errMess = () => {
+    if (loginError) {
+      console.log('here');
+      return (
+        <div class="w-60 relative " id="errorBanner">
+          <button
+            class="absolute -right-2 -top-2"
+            onClick={() => {
+              // show = false;
+              remove(errorBanner);
+            }}
+          >
+            <img src="/closeButton.svg" />
+          </button>
+          <p class="font-light text-base w-full bg-red-200 rounded-md p-2 text-red-800">
+            {loginError}
+          </p>
+        </div>
+      );
+    }
+  };
 
   return (
     <Layout>
@@ -44,64 +61,44 @@ const Login = () => {
         <title>heating client | Login</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div class="static w-screen h-screen flex items-center justify-center">
-        <div class="w-3/5 h-2/4 flex flex-col items-center justify-center bg-gray-100 rounded-md">
-          <div class="w-full h-20 flex"></div>
-          <div class="w-3/4 border-b-2 border-red-400"></div>
-          <div class="w-full h-20 flex"></div>
+      <div class="relative w-screen h-screen flex justify-center">
+        <div class="flex flex-col items-center justify-center space-y-4 absolute w-64">
+          <div class="h-20 w-full mt-8 flex justify-center">{errMess()}</div>
+          <form
+            onSubmit={handleSubmit}
+            class="w-full flex flex-col items-center space-y-4 "
+          >
+            <div class="flex flex-col items-center">
+              <input
+                class="placeholder-gray-500 form-input bg-gray-50 rounded-t-md border-gray-300 h-10 w-60"
+                type="text"
+                id="name"
+                value={name}
+                name="name"
+                placeholder="username"
+                onChange={(e) => setName(e.target.value)}
+              />
+              <input
+                class="placeholder-gray-500 border-t-0 form-input bg-gray-50 rounded-b-md border-gray-300 h-10 w-60"
+                type="password"
+                id="password"
+                value={password}
+                name="password"
+                placeholder="password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div class="w-full border-b-2 border-red-200" />
+            <button
+              class="font-bold text-green-700 bg-green-100 rounded-md h-10 w-60 hover:bg-green-300"
+              type="submit"
+              value="submit"
+            >
+              login
+            </button>
+          </form>
         </div>
       </div>
-      {/* <div class="w-screen h-screen flex flex-row relative">
-          <div class="flex-non w-1/5 h-screen relative"></div>
-          <div class="flex-none w-3/5 h-screen rleative">
-            <div calss="relative">
-              <div class="w-full h-24"></div>
-              <form onSubmit={handleSubmit} class="w-full h-64 space-y-6">
-                <div class="bg-red-100 w-full h-16 rounded-lg relative flex items-center justify-center space-x-4 shadow-lg">
-                  <p class="font-bold">username:</p>
-                  <input
-                    class="placeholder-gray-500 form-input bg-gray-200 rounded-lg h-10 w-60"
-                    type="text"
-                    id="name"
-                    value={name}
-                    name="name"
-                    placeholder="username"
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </div>
-                <div class="bg-red-100 w-full h-16 rounded-lg relative flex items-center justify-center space-x-4 shadow-lg">
-                  <p class="font-bold text-center">password:</p>
-                  <input
-                    class="placeholder-gray-500 form-input bg-gray-200 rounded-lg h-10 w-60"
-                    type="password"
-                    id="password"
-                    value={password}
-                    name="password"
-                    placeholder="password"
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </div>
-                <div class="relative h-16 w-full flex items-center">
-                  <div class="flex items-center bg-green-100 h-10 w-1/6 rounded-lg absolute right-0 flex-none shadow-lg hover:bg-green-300">
-                    <button
-                      class="font-bold text-green-700 absolute right-4"
-                      type="submit"
-                      value="submit"
-                    >
-                      login
-                    </button>
-                  </div>
-                  {!loginError ? (
-                    <div class="absolute left-0 flex items-center h-10 w-4/6 rounded-lg"></div>
-                  ) : (
-                    displayError
-                  )}
-                </div>
-              </form>
-            </div>
-          </div>
-          <div class=" flex-none w-1/5 h-screen"></div>
-        </div> */}
     </Layout>
   );
 };
