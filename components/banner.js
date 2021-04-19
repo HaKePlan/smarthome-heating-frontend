@@ -1,13 +1,23 @@
 import Link from 'next/link';
+import cookie from 'js-cookie';
 import { Router, useRouter } from 'next/router';
 
 import swrFetch from '../lib/fetcher';
 
 function Banner({ children }) {
   let { data, error } = swrFetch('alarm');
+  const token = cookie.get('token');
+
+  // const link = "/utilities/login"
 
   const router = useRouter();
   const path = router.pathname.split('/')[2];
+
+  // const showMe = () => {
+  //   if (!token) {
+
+  //   }
+  // }
 
   const alarmCounter = () => {
     if (error) {
@@ -82,12 +92,9 @@ function Banner({ children }) {
         <div className="flex-grow h-10">
           <Link href="/utilities/settings">{showPlace('settings')}</Link>
         </div>
-        <div className="flex-grow h-10">
-          <Link href="/utilities/login">{showPlace('login')}</Link>
-        </div>
         <div className="flex-none w-20 h-10">
-          <Link href="/utilities/me">
-            {path === 'me' ? (
+          <Link href={!token ? '/utilities/login' : '/utilities/me'}>
+            {path === 'me' || path === 'login' ? (
               <div className="h-full w-full cursor-pointer border-b-2 border-red-400">
                 <img src="/me.svg" width="30" height="30" className="ml-7" />
               </div>
