@@ -8,7 +8,9 @@ export default function Alarm() {
       <Head>
         <title>heating client | me</title>
       </Head>
-      <div className="h-screen">nothing to see here, only the &quot;me&quot; site</div>
+      <div className="h-screen">
+        nothing to see here, only the &quot;me&quot; site
+      </div>
     </Layout>
   );
 }

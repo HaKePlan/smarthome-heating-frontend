@@ -13,7 +13,12 @@ function Banner({ children }) {
     if (error) {
       return (
         <div className="w-6 absolute -right-4 -top-0 flex items-center justify-center">
-          <img src="/alarmErr.svg" width="19" height="19" className="absolute" />
+          <img
+            src="/alarmErr.svg"
+            width="19"
+            height="19"
+            className="absolute"
+          />
         </div>
       );
     } else if (!data || data.data.results === 0) {
@@ -21,7 +26,12 @@ function Banner({ children }) {
     } else {
       return (
         <div className="w-6 absolute -right-4 -top-0 flex items-center justify-center">
-          <img src="/alarmSign.svg" width="22" height="22" className="absolute" />
+          <img
+            src="/alarmSign.svg"
+            width="22"
+            height="22"
+            className="absolute"
+          />
           <p className="absolute text-white font-bold text-sm">
             {data.data.results}
           </p>

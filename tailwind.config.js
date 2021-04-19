@@ -6,9 +6,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     fontFamily: {
-      'sans': ['Manrope'],
-      'serif': [...defaultTheme.fontFamily.serif],
-      'mono': [...defaultTheme.fontFamily.mono]
+      sans: ['Manrope'],
+      serif: [...defaultTheme.fontFamily.serif],
+      mono: [...defaultTheme.fontFamily.mono],
     },
   },
   variants: {

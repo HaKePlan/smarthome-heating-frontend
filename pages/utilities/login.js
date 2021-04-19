@@ -64,7 +64,9 @@ const Login = () => {
       </Head>
       <div className="relative w-screen h-screen flex justify-center">
         <div className="flex flex-col items-center justify-center space-y-4 absolute w-64">
-          <div className="h-20 w-full mt-8 flex justify-center">{errMess()}</div>
+          <div className="h-20 w-full mt-8 flex justify-center">
+            {errMess()}
+          </div>
           <form
             onSubmit={handleSubmit}
             className="w-full flex flex-col items-center space-y-4 "
