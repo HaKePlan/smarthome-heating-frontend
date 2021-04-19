@@ -42,7 +42,6 @@ const Login = () => {
           <button
             className="absolute -right-2 -top-2"
             onClick={() => {
-              // show = false;
               remove(errorBanner);
             }}
           >
