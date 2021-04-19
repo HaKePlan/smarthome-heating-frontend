@@ -1,6 +1,7 @@
-import { useRouter } from 'next/router';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import useSWR from 'swr';
+
 import Layout from '../../components/layout';
 import fetcher from '../../lib/fetcher';
 import swrFetch from '../../lib/fetcher';
@@ -29,12 +30,12 @@ export default function Domain() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <body>
-        <div class="absolute h-3/4 w-screen">
-          <div class="text-black absolute left-64 top-64">
+        <div className="absolute h-3/4 w-screen">
+          <div className="text-black absolute left-64 top-64">
             {data ? (
               <ul>
                 {data.data.data.map(({ name, value, unit, _id }) => (
-                  <li class="listItem" key={_id}>
+                  <li className="listItem" key={_id}>
                     <a>{name}: </a>
                     <a>
                       {value} {unit}
