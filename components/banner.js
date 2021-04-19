@@ -1,5 +1,6 @@
-import { Router, useRouter } from 'next/router';
 import Link from 'next/link';
+import { Router, useRouter } from 'next/router';
+
 import swrFetch from '../lib/fetcher';
 
 function Banner({ children }) {
@@ -11,17 +12,27 @@ function Banner({ children }) {
   const alarmCounter = () => {
     if (error) {
       return (
-        <div class="w-6 absolute -right-4 -top-0 flex items-center justify-center">
-          <img src="/alarmErr.svg" width="19" height="19" class="absolute" />
+        <div className="w-6 absolute -right-4 -top-0 flex items-center justify-center">
+          <img
+            src="/alarmErr.svg"
+            width="19"
+            height="19"
+            className="absolute"
+          />
         </div>
       );
     } else if (!data || data.data.results === 0) {
       return;
     } else {
       return (
-        <div class="w-6 absolute -right-4 -top-0 flex items-center justify-center">
-          <img src="/alarmSign.svg" width="22" height="22" class="absolute" />
-          <p class="absolute text-white font-bold text-sm">
+        <div className="w-6 absolute -right-4 -top-0 flex items-center justify-center">
+          <img
+            src="/alarmSign.svg"
+            width="22"
+            height="22"
+            className="absolute"
+          />
+          <p className="absolute text-white font-bold text-sm">
             {data.data.results}
           </p>
         </div>
@@ -32,57 +43,57 @@ function Banner({ children }) {
   const showPlace = (place) => {
     if (path === place) {
       return (
-        <div class="h-full w-min cursor-pointer border-b-2 border-red-400">
-          <p class="px-2">{place}</p>
+        <div className="h-full w-min cursor-pointer border-b-2 border-red-400">
+          <p className="px-2">{place}</p>
         </div>
       );
     } else {
       return (
-        <div class="h-full w-min cursor-pointer border-b-2 border-transparent hover:border-gray-300">
-          <p class="px-2">{place}</p>
+        <div className="h-full w-min cursor-pointer border-b-2 border-transparent hover:border-gray-300">
+          <p className="px-2">{place}</p>
         </div>
       );
     }
   };
 
   return (
-    <div class="static w-screen h-24 bg-red-50 shadow bg-gradient-to-b from-red-400 font-light">
-      <div class="flex w-full h-full flex-row items-end">
-        <div class="flex-none h-full w-40 flex items-center justify-center">
-          <div class="w-28">
+    <div className="static w-screen h-24 bg-red-50 shadow bg-gradient-to-b from-red-400 font-light">
+      <div className="flex w-full h-full flex-row items-end">
+        <div className="flex-none h-full w-40 flex items-center justify-center">
+          <div className="w-28">
             <Link href="/">
               <img
                 src="/aenergie_logo.svg"
                 width="100"
-                class="cursor-pointer"
+                className="cursor-pointer"
               />
             </Link>
           </div>
         </div>
-        <div class="flex-grow h-10">
-          <div class="w-min relative h-full">
+        <div className="flex-grow h-10">
+          <div className="w-min relative h-full">
             {alarmCounter()}
             <Link href="/utilities/alarm">{showPlace('alarm')}</Link>
           </div>
         </div>
-        <div class="flex-grow h-10">
+        <div className="flex-grow h-10">
           <Link href="/utilities/dashboard">{showPlace('dashboard')}</Link>
         </div>
-        <div class="flex-grow h-10">
+        <div className="flex-grow h-10">
           <Link href="/utilities/settings">{showPlace('settings')}</Link>
         </div>
-        <div class="flex-grow h-10">
+        <div className="flex-grow h-10">
           <Link href="/utilities/login">{showPlace('login')}</Link>
         </div>
-        <div class="flex-none w-20 h-10">
+        <div className="flex-none w-20 h-10">
           <Link href="/utilities/me">
             {path === 'me' ? (
-              <div class="h-full w-full cursor-pointer border-b-2 border-red-400">
-                <img src="/me.svg" width="30" height="30" class="ml-7" />
+              <div className="h-full w-full cursor-pointer border-b-2 border-red-400">
+                <img src="/me.svg" width="30" height="30" className="ml-7" />
               </div>
             ) : (
-              <div class="h-full w-full cursor-pointer border-b-2 border-transparent hover:border-gray-300">
-                <img src="/me.svg" width="30" height="30" class="ml-7" />
+              <div className="h-full w-full cursor-pointer border-b-2 border-transparent hover:border-gray-300">
+                <img src="/me.svg" width="30" height="30" className="ml-7" />
               </div>
             )}
           </Link>
