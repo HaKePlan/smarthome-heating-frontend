@@ -74,6 +74,19 @@ function Banner({ children }) {
         <div class="flex-grow h-10">
           <Link href="/utilities/login">{showPlace('login')}</Link>
         </div>
+        <div class="flex-none w-20 h-10">
+          <Link href="/utilities/me">
+            {path === 'me' ? (
+              <div class="h-full w-full cursor-pointer border-b-2 border-red-400">
+                <img src="/me.svg" width="30" height="30" class="ml-7" />
+              </div>
+            ) : (
+              <div class="h-full w-full cursor-pointer border-b-2 border-transparent hover:border-gray-300">
+                <img src="/me.svg" width="30" height="30" class="ml-7" />
+              </div>
+            )}
+          </Link>
+        </div>
       </div>
       {children}
     </div>
