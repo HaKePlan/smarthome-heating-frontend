@@ -31,10 +31,6 @@ const Login = () => {
       });
   }
 
-  function toggle() {
-    setShowMe(!showMe);
-  }
-
   return (
     <Layout>
       <Head>
@@ -51,7 +47,12 @@ const Login = () => {
                 display: showMe ? 'block' : 'none',
               }}
             >
-              <button className="absolute -right-2 -top-2" onClick={toggle}>
+              <button
+                className="absolute -right-2 -top-2"
+                onClick={() => {
+                  setShowMe(!showMe);
+                }}
+              >
                 <img src="/closeButton.svg" />
               </button>
               <p className="font-light text-base w-full bg-red-200 rounded-md p-2 text-red-800">
