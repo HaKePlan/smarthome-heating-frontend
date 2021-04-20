@@ -38,10 +38,10 @@ const Login = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="relative w-screen h-screen flex justify-center">
-        <div className="flex flex-col items-center justify-center space-y-4 absolute w-64">
+        <div className="flex flex-col items-center justify-center space-y-4 absolute w-96">
           <div className="h-20 w-full mt-8 flex justify-center">
             <div
-              className="w-60 relative "
+              className="w-96 relative "
               id="errorBanner"
               style={{
                 display: showMe ? 'block' : 'none',
@@ -64,9 +64,9 @@ const Login = () => {
             onSubmit={handleSubmit}
             className="w-full flex flex-col items-center space-y-4 "
           >
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center w-full">
               <input
-                className="placeholder-gray-500 form-input bg-gray-50 rounded-t-md border-gray-300 h-10 w-60"
+                className="placeholder-gray-500 form-input bg-gray-50 rounded-t-md border-gray-300 h-10 w-full"
                 type="text"
                 id="name"
                 value={name}
@@ -75,7 +75,7 @@ const Login = () => {
                 onChange={(e) => setName(e.target.value)}
               />
               <input
-                className="placeholder-gray-500 border-t-0 form-input bg-gray-50 rounded-b-md border-gray-300 h-10 w-60"
+                className="placeholder-gray-500 border-t-0 form-input bg-gray-50 rounded-b-md border-gray-300 h-10 w-full"
                 type="password"
                 id="password"
                 value={password}
@@ -86,7 +86,7 @@ const Login = () => {
             </div>
             <div className="w-full border-b-2 border-red-200" />
             <button
-              className="font-bold text-green-700 bg-green-100 rounded-md h-10 w-60 hover:bg-green-300"
+              className="font-bold text-green-700 bg-green-100 rounded-md h-10 w-full hover:bg-green-300"
               type="submit"
               value="submit"
             >
