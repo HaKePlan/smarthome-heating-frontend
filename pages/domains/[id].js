@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import useSWR from 'swr';
 import React, { useState } from 'react';
 
 import Layout from '../../components/layout';
@@ -10,9 +9,8 @@ import swrFetch from '../../lib/fetcher';
 export default function Domain() {
   const router = useRouter();
   const { id } = router.query;
-  const [showMe, setShowMe] = useState(false);
   const [entry, setEntry] = useState('');
-
+  const [value, setValue] = useState('');
   let { data, error } = swrFetch(`domain/${id}`);
 
   if (data) {
@@ -33,17 +31,9 @@ export default function Domain() {
       divArr.push(
         <div>
           <div
-            className="flex flex-row relative space-x-36 p-6 hover:bg-gray-50 hover:shadow-md rounded-md border border-transparent hover:border-gray-200"
+            className="flex flex-row relative space-x-36 p-6 hover:bg-gray-50 hover:shadow-md rounded-md border border-transparent hover:border-gray-200 cursor-pointer"
             onClick={() => {
-              toggle();
-              setEntry(
-                <div className="flex flex-row relative space-x-36 p-6 font-semibold">
-                  <div className="flex-grow">{element.name}</div>
-                  <div className="flex felx-row space-x-1 relative">
-                    <div>{element.value}</div>
-                  </div>
-                </div>
-              );
+              entryHandler(element);
             }}
           >
             <div className="flex-grow">{element.name}</div>
@@ -67,14 +57,76 @@ export default function Domain() {
     });
   };
 
-  function toggle() {
-    setShowMe(!showMe);
+  function submit(e) {
+    e.preventDefault();
+    console.log(value);
+    // setValue('');
+    // window.location.reload(true);
+    setEntry('');
   }
 
-  function submit() {
-    console.log('monog');
-    setShowMe(!showMe);
+  function entryHandler(el) {
+    const options = (el) => {
+      const keyName = Object.keys(el.valueAssignation.assignment);
+      const opt = [];
+      for (let i = 0; i < keyName.length; i++) {
+        const element = el.valueAssignation.assignment[keyName[i]];
+        if (element === el.value) {
+          opt.push(
+            <option selected value={element}>
+              {element}
+            </option>
+          );
+        } else {
+          opt.push(<option value={element}>{element}</option>);
+        }
+      }
+
+      return opt.map((el) => {
+        return el;
+      });
+    };
+
+    setEntry(
+      <div className="absolute border-2 border-red-500 rounded-md p-8 flex-col flex space-y-5 bg-gray-50 shadow-2xl">
+        <div className="flex flex-row relative space-x-36 p-6 font-semibold">
+          <div className="flex-grow">{el.name}</div>
+          <div className="flex felx-row space-x-1 relative">
+            <select
+              onChangeCapture={(e) => {
+                console.log('trigger');
+                console.log(e.currentTarget.value);
+                setValue(e.currentTarget.value);
+                console.log(value);
+              }}
+            >
+              {options(el)}
+            </select>
+          </div>
+        </div>
+        <div className="w-auto border-b-2 border-red-500" />
+        <div className="bottom-0 flex flex-row justify-center space-x-10">
+          <button
+            className="font-bold text-red-700 bg-red-100 rounded-md h-10 w-20 hover:bg-red-300 flex-grow"
+            onClick={() => {
+              setEntry('');
+            }}
+          >
+            cancle
+          </button>
+          <button
+            className="font-bold text-green-700 bg-green-100 rounded-md h-10 w-20 hover:bg-green-300 flex-grow"
+            type="submit"
+            value="submit"
+            onClick={submit}
+          >
+            submit
+          </button>
+        </div>
+      </div>
+    );
   }
+
   return (
     <Layout>
       <Head>
@@ -92,31 +144,7 @@ export default function Domain() {
               container()
             )}
           </div>
-          <div
-            className="absolute border-2 border-red-500 rounded-md p-8 flex-col flex space-y-5 bg-gray-50 shadow-2xl"
-            style={{
-              display: showMe ? 'block' : 'none',
-            }}
-          >
-            {entry}
-            <div className="w-auto border-b-2 border-red-500" />
-            <div className="bottom-0 flex flex-row justify-center space-x-10">
-              <button
-                className="font-bold text-red-700 bg-red-100 rounded-md h-10 w-20 hover:bg-red-300 flex-grow"
-                onClick={toggle}
-              >
-                cancle
-              </button>
-              <button
-                className="font-bold text-green-700 bg-green-100 rounded-md h-10 w-20 hover:bg-green-300 flex-grow"
-                type="submit"
-                value="submit"
-                onClick={submit}
-              >
-                submit
-              </button>
-            </div>
-          </div>
+          {entry}
         </div>
       </div>
     </Layout>
