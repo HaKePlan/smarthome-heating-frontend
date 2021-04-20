@@ -10,6 +10,7 @@ const Login = () => {
   const [loginError, setLoginError] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
+  const [showMe, setShowMe] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -25,35 +26,14 @@ const Login = () => {
         Router.push('/');
       })
       .catch((err) => {
+        setShowMe(true);
         setLoginError(err.response.data.message);
       });
   }
 
-  function remove(el) {
-    var element = el;
-    element.remove(el);
+  function toggle() {
+    setShowMe(!showMe);
   }
-
-  const errMess = () => {
-    if (loginError) {
-      console.log('here');
-      return (
-        <div className="w-60 relative " id="errorBanner">
-          <button
-            className="absolute -right-2 -top-2"
-            onClick={() => {
-              remove(errorBanner);
-            }}
-          >
-            <img src="/closeButton.svg" />
-          </button>
-          <p className="font-light text-base w-full bg-red-200 rounded-md p-2 text-red-800">
-            {loginError}
-          </p>
-        </div>
-      );
-    }
-  };
 
   return (
     <Layout>
@@ -64,7 +44,20 @@ const Login = () => {
       <div className="relative w-screen h-screen flex justify-center">
         <div className="flex flex-col items-center justify-center space-y-4 absolute w-64">
           <div className="h-20 w-full mt-8 flex justify-center">
-            {errMess()}
+            <div
+              className="w-60 relative "
+              id="errorBanner"
+              style={{
+                display: showMe ? 'block' : 'none',
+              }}
+            >
+              <button className="absolute -right-2 -top-2" onClick={toggle}>
+                <img src="/closeButton.svg" />
+              </button>
+              <p className="font-light text-base w-full bg-red-200 rounded-md p-2 text-red-800">
+                {loginError}
+              </p>
+            </div>
           </div>
           <form
             onSubmit={handleSubmit}
