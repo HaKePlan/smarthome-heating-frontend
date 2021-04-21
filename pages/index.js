@@ -1,4 +1,3 @@
-import cookie from 'js-cookie';
 import Head from 'next/head';
 
 import Layout from '../components/layout';
@@ -9,7 +8,7 @@ function Home() {
   // const token = cookie.get('token');
   // console.log(token);
 
-  let { data, error } = swrFetch('home');
+  let { data } = swrFetch('home');
 
   if (data) {
     data.data.data.map((doc) => {
