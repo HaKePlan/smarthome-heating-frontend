@@ -93,7 +93,7 @@ function Banner({ children }) {
           <Link href="/utilities/settings">{showPlace('settings')}</Link>
         </div>
         <div className="flex-none w-20 h-10">
-          <Link href={!token ? '/utilities/login' : '/utilities/me'}>
+          <Link href={token ? '/utilities/me' : '/utilities/login'}>
             {path === 'me' || path === 'login' ? (
               <div className="h-full w-full cursor-pointer border-b-2 border-red-400">
                 <img src="/me.svg" width="30" height="30" className="ml-7" />
