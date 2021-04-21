@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Layout from '../../components/layout';
 import fetcher from '../../lib/fetcher';
@@ -16,9 +16,12 @@ export default function Domain() {
   if (data) {
     data.data.data.map((doc) => {
       if (doc.unit === 'signedValue') {
-        doc.unit = '';
+        doc.showUnit = '';
         const val = doc.value;
-        doc.value = doc.valueAssignation.assignment[val];
+        doc.showValue = doc.valueAssignation.assignment[val];
+      } else {
+        doc.showValue = doc.value;
+        doc.showUnit = doc.unit;
       }
     });
   }
@@ -38,8 +41,8 @@ export default function Domain() {
           >
             <div className="flex-grow">{element.name}</div>
             <div className="flex felx-row space-x-1 relative">
-              <div>{element.value}</div>
-              <div>{element.unit}</div>
+              <div>{element.showValue}</div>
+              <div>{element.showUnit}</div>
             </div>
           </div>
           {i === data.data.data.length ? (
@@ -60,25 +63,29 @@ export default function Domain() {
   function submit(e) {
     e.preventDefault();
     console.log(value);
+    // console.log();
+    console.log(e.target.value);
     // setValue('');
     // window.location.reload(true);
     setEntry('');
   }
 
   function entryHandler(el) {
+    if (!el.valueAssignation) return;
+    // console.log(el);
     const options = (el) => {
       const keyName = Object.keys(el.valueAssignation.assignment);
       const opt = [];
       for (let i = 0; i < keyName.length; i++) {
         const element = el.valueAssignation.assignment[keyName[i]];
-        if (element === el.value) {
+        if (element === el.showValue) {
           opt.push(
-            <option selected value={element}>
+            <option selected value={el.value}>
               {element}
             </option>
           );
         } else {
-          opt.push(<option value={element}>{element}</option>);
+          opt.push(<option value={el.value}>{element}</option>);
         }
       }
 
@@ -92,14 +99,7 @@ export default function Domain() {
         <div className="flex flex-row relative space-x-36 p-6 font-semibold">
           <div className="flex-grow">{el.name}</div>
           <div className="flex felx-row space-x-1 relative">
-            <select
-              onChangeCapture={(e) => {
-                console.log('trigger');
-                console.log(e.currentTarget.value);
-                setValue(e.currentTarget.value);
-                console.log(value);
-              }}
-            >
+            <select onChange={(e) => setValue(e.currentTarget.value)}>
               {options(el)}
             </select>
           </div>
@@ -117,7 +117,7 @@ export default function Domain() {
           <button
             className="font-bold text-green-700 bg-green-100 rounded-md h-10 w-20 hover:bg-green-300 flex-grow"
             type="submit"
-            value="submit"
+            value={el._id}
             onClick={submit}
           >
             submit
