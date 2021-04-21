@@ -14,6 +14,7 @@ const Login = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
+    const tokenName = 'Bearer ';
     //call api
     axios
       .post('http://127.0.0.1:3000/api/v1/user/login', {
@@ -22,7 +23,7 @@ const Login = () => {
       })
       .then((res) => {
         // console.log(res);
-        cookie.set('token', 'Bearer ' + res.data.token, { expires: 2 });
+        cookie.set('token', tokenName + res.data.token, { expires: 2 });
         Router.push('/');
       })
       .catch((err) => {
