@@ -22,7 +22,7 @@ const Login = () => {
       })
       .then((res) => {
         // console.log(res);
-        cookie.set('token', res.data.token, { expires: 2 });
+        cookie.set('token', 'Bearer ' + res.data.token, { expires: 2 });
         Router.push('/');
       })
       .catch((err) => {
