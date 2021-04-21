@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import cookie from 'js-cookie';
-import { Router, useRouter } from 'next/router';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import swrFetch from '../lib/fetcher';
 
@@ -8,16 +8,8 @@ function Banner({ children }) {
   let { data, error } = swrFetch('alarm');
   const token = cookie.get('token');
 
-  // const link = "/utilities/login"
-
   const router = useRouter();
   const path = router.pathname.split('/')[2];
-
-  // const showMe = () => {
-  //   if (!token) {
-
-  //   }
-  // }
 
   const alarmCounter = () => {
     if (error) {
