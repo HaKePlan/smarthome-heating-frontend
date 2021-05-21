@@ -9,7 +9,7 @@ function Banner({ children }) {
   const token = cookie.get('token');
 
   const router = useRouter();
-  const path = router.pathname.split('/')[2];
+  const path = router.asPath.split('/')[2];
 
   const alarmCounter = () => {
     if (error) {
@@ -75,7 +75,7 @@ function Banner({ children }) {
         <div className="flex-grow h-10">
           <div className="w-min relative h-full">
             {alarmCounter()}
-            <Link href="/utilities/alarm">{showPlace('alarm')}</Link>
+            <Link href="/domains/alarme">{showPlace('alarme')}</Link>
           </div>
         </div>
         <div className="flex-grow h-10">
