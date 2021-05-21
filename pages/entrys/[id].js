@@ -6,8 +6,7 @@ import React, { useState } from 'react';
 
 import Layout from '../../components/layout';
 
-async function submit(val, id) {
-  const token = cookie.get('token');
+async function submit(val, id, token) {
   await axios
     .patch(
       `http://${process.env.NEXT_PUBLIC_APIHOST}/id/${id}`,
@@ -24,6 +23,7 @@ async function submit(val, id) {
       console.log(
         `ERROR: ${err.response.status}, ${err.response.data.message}`
       );
+      alert(`ERROR: ${err.response.status}, ${err.response.data.message}`);
     });
 }
 
@@ -32,7 +32,7 @@ const options = (e) => {
   const opt = [];
   for (let i = 0; i < keyName.length; i += 1) {
     opt.push(
-      <option value={keyName[i]}>
+      <option value={keyName[i]} key={i}>
         {e.valueAssignation.assignment[keyName[i]]}
       </option>
     );
@@ -78,15 +78,17 @@ function Entry({ ent, from }) {
                 cancle
               </button>
             </Link>
-            <button
-              className="font-bold text-green-700 bg-green-100 rounded-md h-10 w-20 hover:bg-green-300 flex-grow"
-              type="submit"
-              onClick={() => {
-                submit(value, ent._id);
-              }}
-            >
-              submit
-            </button>
+            <Link href={`/domains/${from}`}>
+              <button
+                className="font-bold text-green-700 bg-green-100 rounded-md h-10 w-20 hover:bg-green-300 flex-grow"
+                type="submit"
+                onClick={() => {
+                  submit(value, ent._id, token);
+                }}
+              >
+                submit
+              </button>
+            </Link>
           </div>
         </div>
       </div>
