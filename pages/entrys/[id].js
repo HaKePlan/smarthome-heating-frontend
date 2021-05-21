@@ -1,5 +1,6 @@
 import axios from 'axios';
 import cookie from 'js-cookie';
+import Head from 'next/head';
 import Link from 'next/link';
 import React, { useState } from 'react';
 
@@ -112,6 +113,10 @@ function Entry({ ent, from }) {
 
   return (
     <Layout>
+      <Head>
+        <title>heating client | {ent.name}</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className="relative w-screen h-screen flex justify-center">
         <div className="flex w-screen mt-24 justify-center">
           {token ? postEntry() : permDenied()}
