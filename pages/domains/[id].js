@@ -10,7 +10,7 @@ export default function Domain() {
   const { id } = router.query;
 
   // 1) GET DATA FROM API SERVER
-  let { data } = swrFetch('domain/allgemein');
+  let { data } = swrFetch(`domain/${id}`);
 
   // 2) MAINIPULATE DATA TO SHOW CLEAN
   if (data) {
@@ -39,7 +39,9 @@ export default function Domain() {
             className="flex flex-row relative space-x-36 p-6 hover:bg-gray-50 hover:shadow-md rounded-md border border-transparent hover:border-gray-200 cursor-pointer"
             onClick={() => {
               if (element.register === 4 || element.register === 0) {
-                Router.push(`../entrys/${element._id}`);
+                Router.push(
+                  `../entrys/${element._id}?source=${element.domain}`
+                );
               }
             }}
           >
